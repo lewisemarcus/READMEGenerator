@@ -1,27 +1,29 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer')
 const fs = require('fs')
-const path = require('path')
+const generateMarkdown = require("./utils/generateMarkdown")
 // TODO: Create an array of questions for user input
 const questions = ["What is the title of your project? ",
-    "Please enter a description of your project (press enter on an empty line to continue): ",
-    "Please enter the installation instructions (press enter on an empty line to continue): ",
-    "Please enter the usage information (press enter on an empty line to continue): ",
-    "Please choose a license for your application (press enter to continue): ",
-    "Please enter the test instructions (press enter on an empty line to continue): ",
-    "Please enter your first and last name, your GitHub username, and your email address (press enter to continue): ",
-    "Please enter a list of contributors, with first and last name followed by their GitHub username (press enter on an empty line to continue): ",
-
-
-];
+    "Please enter a description of your project (be detailed and remeber to save before exiting!): ",
+    "Please enter the installation instructions (please enter each instruction on a new line in the editor, and remember to save before exiting!): ",
+    "Please enter the usage information (please enter each instruction on a new line in the editor, and remember to save before exiting!): ",
+    "Please choose a license for your application: ",
+    "Please enter the test instructions (please enter each instruction on a new line in the editor, and remember to save before exiting!): ",
+    "Please enter your first and last name, your GitHub username, and your email address (same line): ",
+    "Please enter a list of contributors, with first and last name followed by their GitHub username (please enter each instruction on a new line in the editor, and remember to save before exiting!): "];
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
     //Empty previous README file.
-    fs.writeFile(fileName.path, '', function () {console.log('Done!')})
+    fs.writeFile(fileName.path, '', function (error) {
+        error ? console.error(error) : console.log('Previous README cleared... ')
+    })
     //Begin adding new data to README file.
-    fileName.write(`# ${data.title} \r\n`)
+    //console.log(generateMarkdown.generateMarkdown(data))
+    fileName.write(generateMarkdown.capitalizeFirstLetter(`# ${data.title}`) + ` \r\n`)
     fileName.write(`## Description \r\n`)
     fileName.write(`${data.description} \r\n`)
+    fileName.write(`## Instructions \r\n`)
+    fileName.write(` \`\`\` \r\n \r\n ${data.instructions} \r\n \r\n \`\`\` \r\n`)
 }
 // TODO: Create a function to initialize app
 function init() {
@@ -30,26 +32,26 @@ function init() {
             {
                 type: 'input',
                 message: questions[0],
-                name: 'title',
+                name: 'title'
             },
             {
                 type: 'editor',
                 message: questions[1],
-                name: 'description',
+                name: 'description'
             },
             {
                 type: 'editor',
                 message: questions[2],
-                name: 'isntructions',
+                name: 'instructions'
             },
             {
                 type: 'editor',
                 message: questions[3],
-                name: 'usage',
+                name: 'usage'
             },
             {
                 type: 'list',
-                message: questions[3],
+                message: questions[4],
                 name: 'license',
                 choices: ["Academic Free License v3.0",
                     "Apache license 2.0",
@@ -86,6 +88,21 @@ function init() {
                     "The Unlicense",
                     "zLib License"
                 ]
+            },
+            {
+                type: 'editor',
+                message: questions[5],
+                name: 'test'
+            },
+            {
+                type: 'input',
+                message: questions[6],
+                name: 'firstLastUser'
+            },
+            {
+                type: 'editor',
+                message: questions[7],
+                name: 'contributors'
             }
         ])
         .then(function (data) {
