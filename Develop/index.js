@@ -4,13 +4,13 @@ const fs = require('fs')
 const generateMarkdown = require("./utils/generateMarkdown")
 // TODO: Create an array of questions for user input
 const questions = ["What is the title of your project? ",
-    "Please enter a description of your project (be detailed and remeber to save before exiting!): ",
-    "Please enter the installation instructions (please enter each instruction on a new line in the editor, and remember to save before exiting!): ",
-    "Please enter the usage information (please enter each instruction on a new line in the editor, and remember to save before exiting!): ",
+    "Please enter a description of your project (be detailed and remember to save before exiting!): ",
+    "Please enter the installation instructions (please allow one empty line space between each instruction, and remember to save before exiting!): ",
+    "Please enter the usage information (please allow one space between each example of usage, and remember to save before exiting!): ",
     "Please choose a license for your application: ",
-    "Please enter the test instructions (please enter each instruction on a new line in the editor, and remember to save before exiting!): ",
+    "Please enter the test instructions (please allow one empty line space between each instruction, and remember to save before exiting!): ",
     "Please enter your first and last name, your GitHub username, and your email address (same line): ",
-    "Please enter a list of contributors, with first and last name followed by their GitHub username (please enter each instruction on a new line in the editor, and remember to save before exiting!): "];
+    "Please enter a list of contributors, with first and last name followed by their GitHub username (please allow one empty line space between each contributor, and remember to save before exiting!): "];
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
     //Empty previous README file.
