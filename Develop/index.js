@@ -24,6 +24,8 @@ function writeToFile(fileName, data) {
     fileName.write(`${data.description} \r\n`)
     fileName.write(`## Instructions \r\n`)
     fileName.write(` \`\`\` \r\n \r\n ${data.instructions} \r\n \r\n \`\`\` \r\n`)
+    fileName.write(`## Usage \r\n`)
+    fileName.write(` \`\`\` \r\n \r\n ${data.usage} \r\n \r\n \`\`\` \r\n`)
 }
 // TODO: Create a function to initialize app
 function init() {
