@@ -10,22 +10,14 @@ const questions = ["What is the title of your project? ",
     "Please choose a license for your application: ",
     "Please enter the test instructions (please allow one empty line space between each instruction, and remember to save before exiting!): ",
     "Please enter your first and last name, your GitHub username, and your email address (same line): ",
+    "Are there contributors other than yourself? ",
     "Please enter a list of contributors, with first and last name followed by their GitHub username (please allow one empty line space between each contributor, and remember to save before exiting!): "];
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
     //Empty previous README file.
-    fs.writeFile(fileName.path, '', function (error) {
+    fs.writeFile(fileName.path, data, function (error) {
         error ? console.error(error) : console.log('Previous README cleared... ')
     })
-    //Begin adding new data to README file.
-    //console.log(generateMarkdown.generateMarkdown(data))
-    fileName.write(generateMarkdown.capitalizeFirstLetter(`# ${data.title}`) + ` \r\n`)
-    fileName.write(`## Description \r\n`)
-    fileName.write(`${data.description} \r\n`)
-    fileName.write(`## Instructions \r\n`)
-    fileName.write(` \`\`\` \r\n \r\n ${data.instructions} \r\n \r\n \`\`\` \r\n`)
-    fileName.write(`## Usage \r\n`)
-    fileName.write(` \`\`\` \r\n \r\n ${data.usage} \r\n \r\n \`\`\` \r\n`)
 }
 // TODO: Create a function to initialize app
 function init() {
@@ -34,22 +26,38 @@ function init() {
             {
                 type: 'input',
                 message: questions[0],
-                name: 'title'
+                name: 'title',
+                validate: (value) => {
+                    if (value) return true
+                    else return ('Please enter a title to continue: ')
+                }
             },
             {
                 type: 'editor',
                 message: questions[1],
-                name: 'description'
+                name: 'description',
+                validate: (value) => {
+                    if (value) return true
+                    else return ('Please enter a description to continue: ')
+                }
             },
             {
                 type: 'editor',
                 message: questions[2],
-                name: 'instructions'
+                name: 'instructions',
+                validate: (value) => {
+                    if (value) return true
+                    else return ('Please enter installation instructions to continue: ')
+                }
             },
             {
                 type: 'editor',
                 message: questions[3],
-                name: 'usage'
+                name: 'usage',
+                validate: (value) => {
+                    if (value) return true
+                    else return ('Please enter usage instructions to continue: ')
+                }
             },
             {
                 type: 'list',
@@ -89,30 +97,66 @@ function init() {
                     "University of Illinois/NCSA Open Source License",
                     "The Unlicense",
                     "zLib License"
-                ]
+                ],
+                validate: (value) => {
+                    if (value) return true
+                    else return ('Please choose a license before continuing: ')
+                }
             },
             {
                 type: 'editor',
                 message: questions[5],
-                name: 'test'
+                name: 'test',
+                validate: (value) => {
+                    if (value) return true
+                    else return ('Please enter testing instructions before continuing: ')
+                }
             },
             {
                 type: 'input',
                 message: questions[6],
-                name: 'firstLastUser'
+                name: 'firstLastUser',
+                validate: (value) => {
+                    if (value) return true
+                    else return ('Please enter your first and last name followed by your username: ')
+                }
+            },
+            {
+                type: 'list',
+                message: questions[7],
+                name: 'contributorBool',
+                choices: ['Yes', 'No']
             },
             {
                 type: 'editor',
-                message: questions[7],
-                name: 'contributors'
+                message: questions[8],
+                name: 'contributors',
+                when: (answers) => {
+                    return answers.contributorBool === 'Yes'
+                },
+                validate: (value) => {
+                    if (value) return true
+                    else return  ('Please enter the information of each contributor: ')
+                }
             }
         ])
         .then(function (data) {
             const readMe = fs.createWriteStream(`README.md`, {
                 flags: 'a'
             })
-            writeToFile(readMe, data)
+            writeToFile(readMe, generateMarkdown.generateMarkdown(data))
         })
 }
 // Function call to initialize app
 init();
+//NOTES:
+    //Alternate way to add info to files:    
+        //Begin adding new data to README file.
+        //console.log(generateMarkdown.generateMarkdown(data))
+        // fileName.write(generateMarkdown.capitalizeFirstLetter(`# ${data.title}`) + ` \r\n`)
+        // fileName.write(`## Description \r\n`)
+        // fileName.write(`${data.description} \r\n`)
+        // fileName.write(`## Instructions \r\n`)
+        // fileName.write(` \`\`\` \r\n \r\n ${data.instructions} \r\n \r\n \`\`\` \r\n`)
+        // fileName.write(`## Usage \r\n`)
+        // fileName.write(` \`\`\` \r\n \r\n ${data.usage} \r\n \r\n \`\`\` \r\n`)

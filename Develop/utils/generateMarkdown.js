@@ -18,7 +18,16 @@ function renderLicenseSection(license) {
 
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
-  return [`# ${data.title}`];
+  return `# ` + capitalizeFirstLetter(data.title)+ ` \r\n
+  ## Description \r\n
+  ${data.description} \r\n
+  ## Instructions \r\n
+  \`\`\` \r\n \r\n ${data.instructions} \r\n \r\n \`\`\` \r\n
+  ## Usage \r\n
+  \`\`\` \r\n \r\n ${data.usage} \r\n \r\n \`\`\` \r\n
+
+  
+  `
 }
 
 function capitalizeFirstLetter(string) {
