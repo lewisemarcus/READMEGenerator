@@ -5,13 +5,13 @@ const generateMarkdown = require("./utils/generateMarkdown")
 // TODO: Create an array of questions for user input
 const questions = ["What is the title of your project? ",
     "Please enter a description of your project (be detailed and remember to save before exiting!): ",
-    "Please enter the installation instructions, code block markdown ACTIVE (please allow one empty line space between each instruction, and remember to save before exiting!): ",
+    "First list the package manager, then list the packages the user will need to install in order to run the application (separate each by a comma, no spaces!): ",
     "Please enter the usage information, code block markdown ACTIVE (please allow one space between each example of usage, and remember to save before exiting!): ",
     "Please choose a license for your application: ",
     "Please enter the test instructions, code block markdown ACTIVE (please allow one empty line space between each instruction, and remember to save before exiting!): ",
-    "Please enter your first and last name, your GitHub username, and your email address (separate each by a comma, no spaces!): ",
-    "Are there contributors other than yourself? ",
-    "Please enter the contributor's GitHub username, and separate multiple users with commas (no spaces!): "];
+    "Please enter the lead author's first name, last name, GitHub username, and email address (separate each by a comma, no spaces!): ",
+    "Are there other authors?: ",
+    "Please enter the remaining author(s)'s GitHub username(s), and separate multiple users with commas (no spaces!): "];
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
     //Empty previous README file.
@@ -40,7 +40,7 @@ const prompts = [
         }
     },
     {
-        type: 'editor',
+        type: 'input',
         message: questions[2],
         name: 'instructions',
         validate: (value) => {
@@ -123,15 +123,15 @@ const prompts = [
     {
         type: 'list',
         message: questions[7],
-        name: 'contributorBool',
+        name: 'authorBool',
         choices: ['Yes', 'No']
     },
     {
         type: 'input',
         message: questions[8],
-        name: 'contributors',
+        name: 'authors',
         when: (answers) => {
-            return answers.contributorBool === 'Yes'
+            return answers.authorBool === 'Yes'
         },
         validate: (value) => {
             if (value) return true

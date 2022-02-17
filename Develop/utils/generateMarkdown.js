@@ -22,7 +22,7 @@ function renderLicenseSection(license) {
   For more information on the License, please visit:  ${renderLicenseLink(license.split("(")[1])}`
 }
 
-function contributorFormat(contributors) {
+function authorFormat(contributors) {
   let users = ``
   for (let each of contributors) {
     if(each.trim().length == 0) users += ``
@@ -31,19 +31,30 @@ function contributorFormat(contributors) {
   return users
 }
 
+function instructionFormat(instructions) {
+  const pkgManager = instructions[0]
+  instructions.shift()
+  let instr = `Use the package manager [${pkgManager}] to install ${instructions}\r\n`
+  let install = ``
+  for (let each of instructions) {
+    install += `${pkgManager} install ${each}\r\n`
+  }
+  return `${instr}\`\`\`\r\n\r\n${install}\r\n\r\n\`\`\``
+}
+
 function contactInfo(firstLastUser) {
   const userInfo = firstLastUser.split(",")
   return `## Questions
-  \r\n- [${capitalizeFirstLetter(userInfo[0])} ${capitalizeFirstLetter(userInfo[1])}](https://github.com/${userInfo[2]}) - GitHub Link
+  \r\n- [${capitalizeFirstLetter(userInfo[0])} ${capitalizeFirstLetter(userInfo[1])}](https://github.com/${userInfo[2]}) - Lead Author's GitHub Link
   \r\n- If you would like to email me for further questions, please send one to: <${userInfo[3]}>`
 }
 
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
-  let contributors
-  if (data.contributorBool === "Yes") {contributors = data.contributors.split(",")}
-  else {contributors = ''}
-  
+  let authors
+  if (data.authorBool === "Yes") {authors = data.authors.split(",")}
+  else {authors = ''}
+  let instructions = data.instructions.split(",")
   return `#  ${capitalizeFirstLetter(data.title)} \r\n
   ${renderLicenseBadge(data.license.split("(")[0])} \r\n
   ## Description \r\n
@@ -51,17 +62,20 @@ function generateMarkdown(data) {
   ## Table of Contents\r\n
   - [Installation](#installation)\r\n
   - [Usage](#usage)\r\n
-  - [Contributing](#contributing)\r\n
+  - [Author(s)](#author(s))\r\n
+  - [Contributing](#contributing)
   - [License](#license)\r\n
   - [Questions](#questions)\r\n
   ## Installation\r\n
-  \`\`\`\r\n \r\n ${data.instructions}\r\n\r\n\`\`\` \r\n
-  ## Usage \r\n
-  \`\`\`\r\n\r\n ${data.usage}\r\n\r\n \`\`\`\r\n
-  ## Contributing \r\n
-  ${contributorFormat(contributors)}
+  ${instructionFormat(instructions)}\r\n
+  ## Usage\r\n
+  \`\`\`\r\n\r\n${data.usage}\r\n\r\n \`\`\`\r\n
+  ## Author(s)\r\n
+  ${authorFormat(authors)}
   \r\n## Tests\r\n
-  \`\`\`\r\n \r\n${data.test}\r\n\r\n \`\`\`\r\n
+  \`\`\`\r\n\r\n${data.test}\r\n\r\n \`\`\`\r\n
+  ## Contributing \r\n
+
   \r\n## License\r\n
   ${renderLicenseSection(data.license)}\r\n
   ${contactInfo(data.firstLastUser)}\r\n`
