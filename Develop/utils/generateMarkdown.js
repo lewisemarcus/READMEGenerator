@@ -33,9 +33,9 @@ function contributorFormat(contributors) {
 
 function contactInfo(firstLastUser) {
   const userInfo = firstLastUser.split(",")
-  return `## Contact
-  \r\n- [${capitalizeFirstLetter(userInfo[0])} ${capitalizeFirstLetter(userInfo[1])}](https://github.com/${userInfo[2]})
-  \r\n- <${userInfo[3]}>`
+  return `## Questions
+  \r\n- [${capitalizeFirstLetter(userInfo[0])} ${capitalizeFirstLetter(userInfo[1])}](https://github.com/${userInfo[2]}) - GitHub Link
+  \r\n- If you would like to email me for further questions, please send one to: <${userInfo[3]}>`
 }
 
 // TODO: Create a function to generate markdown for README
@@ -47,19 +47,21 @@ function generateMarkdown(data) {
   return `#  ${capitalizeFirstLetter(data.title)} \r\n
   ${renderLicenseBadge(data.license.split("(")[0])} \r\n
   ## Description \r\n
-  ${data.description} \r\n
-  ## Table of Contents \r\n
-  - [Installation](#installation) \r\n
+  ${data.description}\r\n
+  ## Table of Contents\r\n
+  - [Installation](#installation)\r\n
   - [Usage](#usage)\r\n
-  - [Credits](#credits)\r\n
+  - [Contributing](#contributing)\r\n
   - [License](#license)\r\n
-  - [Contact](#contact)\r\n
-  ## Installation \r\n
-  \`\`\` \r\n \r\n ${data.instructions} \r\n \r\n \`\`\` \r\n
+  - [Questions](#questions)\r\n
+  ## Installation\r\n
+  \`\`\`\r\n \r\n ${data.instructions}\r\n\r\n\`\`\` \r\n
   ## Usage \r\n
-  \`\`\` \r\n \r\n ${data.usage} \r\n \r\n \`\`\` \r\n
-  ## Credits \r\n
+  \`\`\`\r\n\r\n ${data.usage}\r\n\r\n \`\`\`\r\n
+  ## Contributing \r\n
   ${contributorFormat(contributors)}
+  \r\n## Tests\r\n
+  \`\`\`\r\n \r\n${data.test}\r\n\r\n \`\`\`\r\n
   \r\n## License\r\n
   ${renderLicenseSection(data.license)}\r\n
   ${contactInfo(data.firstLastUser)}\r\n`

@@ -5,10 +5,10 @@ const generateMarkdown = require("./utils/generateMarkdown")
 // TODO: Create an array of questions for user input
 const questions = ["What is the title of your project? ",
     "Please enter a description of your project (be detailed and remember to save before exiting!): ",
-    "Please enter the installation instructions (please allow one empty line space between each instruction, and remember to save before exiting!): ",
-    "Please enter the usage information (please allow one space between each example of usage, and remember to save before exiting!): ",
+    "Please enter the installation instructions, code block markdown ACTIVE (please allow one empty line space between each instruction, and remember to save before exiting!): ",
+    "Please enter the usage information, code block markdown ACTIVE (please allow one space between each example of usage, and remember to save before exiting!): ",
     "Please choose a license for your application: ",
-    "Please enter the test instructions (please allow one empty line space between each instruction, and remember to save before exiting!): ",
+    "Please enter the test instructions, code block markdown ACTIVE (please allow one empty line space between each instruction, and remember to save before exiting!): ",
     "Please enter your first and last name, your GitHub username, and your email address (separate each by a comma, no spaces!): ",
     "Are there contributors other than yourself? ",
     "Please enter the contributor's GitHub username, and separate multiple users with commas (no spaces!): "];

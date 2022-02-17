@@ -1,51 +1,66 @@
 #  Marcus 
 
-  ![License: Boost Software 1.0 ](https://img.shields.io/badge/License-Boost%20Software%201.0-informational) 
+  ![License: Academic Free v3.0 ](https://img.shields.io/badge/License-Academic%20Free%20v3.0-informational) 
 
   ## Description 
 
-  	wefwef 
+  qweqwe
 
-  ## Table of Contents 
+  ## Table of Contents
 
-  - [Installation](#installation) 
+  - [Installation](#installation)
 
   - [Usage](#usage)
 
-  - [Credits](#credits)
+  - [Contributing](#contributing)
 
   - [License](#license)
 
-  - [Contact](#contact)
+  - [Questions](#questions)
 
-  ## Installation 
+  ## Installation
 
-  ``` 
+  ```
  
- wefwef 
- 
- ``` 
+ wefwef
+
+``` 
 
   ## Usage 
 
-  ``` 
- 
- efwef 
- 
- ``` 
+  ```
 
-  ## Credits 
+ wefwef
+
+ ```
+
+  ## Contributing 
+
+  - [qweqweqe](https://github.com/qweqweqe)
+
+- [qsed](https://github.com/qsed)
+
+- [qwsd](https://github.com/qwsd)
+
 
   
+## Tests
+
+  ```
+ 
+wqefwef
+
+ ```
+
   
 ## License
 
-  	Licensed under the Boost Software 1.0 License (the "License"); you may not use this file except in compliance with the License.
+  Licensed under the Academic Free v3.0 License (the "License"); you may not use this file except in compliance with the License.
 
-  	For more information on the License, please visit:  https://opensource.org/licenses/bsl-1.0
+  For more information on the License, please visit:  https://opensource.org/licenses/afl-3.0
 
-  ## Contact
+  ## Questions
   
 - [Qwe Qwe](https://github.com/qwe)
   
-- <qwe>
+- If you would like to email me for further questions, please send one to: <qwe>
