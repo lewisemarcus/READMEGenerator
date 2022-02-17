@@ -6,6 +6,7 @@ const generateMarkdown = require("./utils/generateMarkdown")
 const questions = ["What is the title of your project? ",
     "Please enter a description of your project (be detailed and remember to save before exiting!): ",
     "First list the package manager, then list the packages the user will need to install in order to run the application (separate each by a comma, no spaces!): ",
+    "Enter the line of code needed to invoke the application: ",
     "Please enter the usage information, code block markdown ACTIVE (please allow one space between each example of usage, and remember to save before exiting!): ",
     "Please choose a license for your application: ",
     "Please enter the test instructions, code block markdown ACTIVE (please allow one empty line space between each instruction, and remember to save before exiting!): ",
@@ -49,8 +50,17 @@ const prompts = [
         }
     },
     {
-        type: 'editor',
+        type: 'input',
         message: questions[3],
+        name: 'invoke',
+        validate: (value) => {
+            if (value) return true
+            else return ('Please enter the line needed to invoke the application: ')
+        }
+    },
+    {
+        type: 'editor',
+        message: questions[4],
         name: 'usage',
         validate: (value) => {
             if (value) return true
@@ -59,7 +69,7 @@ const prompts = [
     },
     {
         type: 'list',
-        message: questions[4],
+        message: questions[5],
         name: 'license',
         choices: ["No License",
             "Academic Free v3.0 (afl-3.0)",
@@ -104,7 +114,7 @@ const prompts = [
     },
     {
         type: 'editor',
-        message: questions[5],
+        message: questions[6],
         name: 'test',
         validate: (value) => {
             if (value) return true
@@ -113,7 +123,7 @@ const prompts = [
     },
     {
         type: 'input',
-        message: questions[6],
+        message: questions[7],
         name: 'firstLastUser',
         validate: (value) => {
             if (value.split(",").length == 4) return true
@@ -122,13 +132,13 @@ const prompts = [
     },
     {
         type: 'list',
-        message: questions[7],
+        message: questions[8],
         name: 'authorBool',
         choices: ['Yes', 'No']
     },
     {
         type: 'input',
-        message: questions[8],
+        message: questions[9],
         name: 'authors',
         when: (answers) => {
             return answers.authorBool === 'Yes'

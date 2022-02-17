@@ -22,16 +22,17 @@ function renderLicenseSection(license) {
   For more information on the License, please visit:  ${renderLicenseLink(license.split("(")[1])}`
 }
 
-function authorFormat(contributors) {
+function authorFormat(contributors, primeAuth) {
   let users = ``
+   
   for (let each of contributors) {
     if(each.trim().length == 0) users += ``
     else users += `- [${each}](https://github.com/${each})\r\n\r\n`
   }
-  return users
+  return `- [${primeAuth}](https://github.com/${primeAuth})\r\n\r\n` + users
 }
 
-function instructionFormat(instructions) {
+function instructionFormat(instructions, invoke) {
   const pkgManager = instructions[0]
   instructions.shift()
   let instr = `Use the package manager [${pkgManager}] to install ${instructions}\r\n`
@@ -39,7 +40,7 @@ function instructionFormat(instructions) {
   for (let each of instructions) {
     install += `${pkgManager} install ${each}\r\n`
   }
-  return `${instr}\`\`\`\r\n\r\n${install}\r\n\r\n\`\`\``
+  return `${instr}\`\`\`\r\n\r\n${install}\r\n//To run\r\n${invoke}\r\n\r\n\`\`\``
 }
 
 function contactInfo(firstLastUser) {
@@ -52,6 +53,7 @@ function contactInfo(firstLastUser) {
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
   let authors
+  const primeAuth = data.firstLastUser.split(",")[2]
   if (data.authorBool === "Yes") {authors = data.authors.split(",")}
   else {authors = ''}
   let instructions = data.instructions.split(",")
@@ -67,11 +69,11 @@ function generateMarkdown(data) {
   - [License](#license)\r\n
   - [Questions](#questions)\r\n
   ## Installation\r\n
-  ${instructionFormat(instructions)}\r\n
+  ${instructionFormat(instructions, data.invoke)}\r\n
   ## Usage\r\n
   \`\`\`\r\n\r\n${data.usage}\r\n\r\n \`\`\`\r\n
   ## Author(s)\r\n
-  ${authorFormat(authors)}
+  ${authorFormat(authors, primeAuth)}
   \r\n## Tests\r\n
   \`\`\`\r\n\r\n${data.test}\r\n\r\n \`\`\`\r\n
   ## Contributing \r\n
