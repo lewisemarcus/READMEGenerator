@@ -23,8 +23,7 @@ function renderLicenseSection(license) {
 }
 
 function authorFormat(contributors, primeAuth) {
-  let users = ``
-   
+  let users = `` 
   for (let each of contributors) {
     if(each.trim().length == 0) users += ``
     else users += `- [${each}](https://github.com/${each})\r\n\r\n`
@@ -50,6 +49,16 @@ function contactInfo(firstLastUser) {
   \r\n- If you would like to email me for further questions, please send one to: <${userInfo[3]}>`
 }
 
+function formatWalkthrough(data) {
+  if (data.walkthroughBool === "No") return ''
+  else return `## Walkthrough\r\nHere is a link to a video going over the steps to use the application: [${data.title} Demo](${data.walkthrough})\r\n`
+}
+
+function formatContribute(contributing) {
+  if (contributing == '') return ''
+  else return `## Contributing\r\n ${contributing}\r\n`
+}
+
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
   let authors
@@ -65,19 +74,19 @@ function generateMarkdown(data) {
   - [Installation](#installation)\r\n
   - [Usage](#usage)\r\n
   - [Author(s)](#author(s))\r\n
-  - [Contributing](#contributing)
+  - [Contributing](#contributing)\r\n
   - [License](#license)\r\n
   - [Questions](#questions)\r\n
   ## Installation\r\n
   ${instructionFormat(instructions, data.invoke)}\r\n
+  ${formatWalkthrough(data)}
   ## Usage\r\n
   \`\`\`\r\n\r\n${data.usage}\r\n\r\n \`\`\`\r\n
   ## Author(s)\r\n
   ${authorFormat(authors, primeAuth)}
   \r\n## Tests\r\n
   \`\`\`\r\n\r\n${data.test}\r\n\r\n \`\`\`\r\n
-  ## Contributing \r\n
-
+  ${formatContribute(data.contributing)}
   \r\n## License\r\n
   ${renderLicenseSection(data.license)}\r\n
   ${contactInfo(data.firstLastUser)}\r\n`

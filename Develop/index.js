@@ -12,7 +12,10 @@ const questions = ["What is the title of your project? ",
     "Please enter the test instructions, code block markdown ACTIVE (please allow one empty line space between each instruction, and remember to save before exiting!): ",
     "Please enter the lead author's first name, last name, GitHub username, and email address (separate each by a comma, no spaces!): ",
     "Are there other authors?: ",
-    "Please enter the remaining author(s)'s GitHub username(s), and separate multiple users with commas (no spaces!): "];
+    "Please enter the remaining author(s)'s GitHub username(s), and separate multiple users with commas (no spaces!): ",
+    "Is there a walkthrough video you would like to attach? ",
+    "Please enter the link the to the video: ",
+    "Please enter information regarding future contributions (leave empty and press enter to continue without a contributing section): "];
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
     //Empty previous README file.
@@ -27,7 +30,8 @@ const prompts = [
         message: questions[0],
         name: 'title',
         validate: (value) => {
-            if (value) return true
+            //returns true if there is an entered value. 
+            if (value) return true 
             else return ('Please enter a title to continue: ')
         }
     },
@@ -126,6 +130,7 @@ const prompts = [
         message: questions[7],
         name: 'firstLastUser',
         validate: (value) => {
+            //User input must have four inputs (first name, last name, username, email).
             if (value.split(",").length == 4) return true
             else return ('Please enter your first and last name, your username and your email address (please separate each by a comma, no spaces!): ')
         }
@@ -147,6 +152,37 @@ const prompts = [
             if (value) return true
             else return ('Please enter your contributor list separated by commas: ')
         }
+    },
+    {
+        type: 'list',
+        message: questions[10],
+        name: 'walkthroughBool',
+        choices: ['Yes', 'No'],
+    },
+    {
+        type: 'input',
+        message: questions[11],
+        name: 'walkthrough',
+        when: (answers) => {
+            return answers.walkthroughBool === 'Yes'
+        },
+        validate: (value) => {
+            //Checks if entered link is actually a URL
+            let url
+            try {
+                url = new URL(value)
+            }
+            catch (_) {
+                return 'Please enter a link to the walkthrough video: '
+            }
+            return url.protocol === "http:" || url.protocol === "https:"
+            //else return ('Please enter a link to the walkthrough video: ')
+        }
+    },
+    {
+        type: 'input',
+        message: questions[12],
+        name: 'contributing'
     }
 ]
 // TODO: Create a function to initialize app
