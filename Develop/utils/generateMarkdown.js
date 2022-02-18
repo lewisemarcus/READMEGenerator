@@ -55,13 +55,13 @@ function formatWalkthrough(data) {
 }
 
 function formatContribute(contributing) {
-  if (contributing == '') return ''
-  else return `## Contributing\r\n ${contributing}\r\n`
+  if (contributing.trim() == '') return 'N/A'
+  else return `${contributing}\r\n`
 }
 
 function formatUsage(usage) {
   let usageList = ``
-  if (usage == '') return 'N/A'
+  if (usage.trim() == '') return 'N/A'
   else {
     for (let each of usage.split(",")) {
       usageList += `${each}\r\n`
@@ -72,7 +72,7 @@ function formatUsage(usage) {
 
 function formatTests(test) {
   let testList = ``
-  if (test == '') return 'N/A'
+  if (test.trim() == '') return 'N/A'
   else {
     for (let each of test.split(",")) {
       testList += `${each}\r\n`
@@ -108,6 +108,7 @@ function generateMarkdown(data) {
   ${authorFormat(authors, primeAuth)}
   \r\n## Tests
   \r\n${formatTests(data.test)}\r\n
+  ## Contributing\r\n 
   ${formatContribute(data.contributing)}
   \r\n## License\r\n
   ${renderLicenseSection(data.license)}\r\n
