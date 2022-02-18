@@ -4,7 +4,9 @@
 
   ## Description
 
-  GIVEN a command-line application that accepts user input
+ ```md
+ 
+ GIVEN a command-line application that accepts user input
 WHEN a user is prompted for information about my application repository
 THEN a high-quality, professional README.md is generated with the title of my project and sections entitled Description, Table of Contents, Installation, Usage, License, Contributing, Tests, and Questions
 WHEN a user enters their project title
@@ -19,6 +21,8 @@ WHEN a user enters their email address
 THEN this is added to the section of the README entitled Questions, with instructions on how to reach them with additional questions
 WHEN a user clicks on the links in the Table of Contents
 THEN a user is taken to the corresponding section of the README
+
+```
 
   ## Table of Contents
 
