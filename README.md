@@ -51,11 +51,7 @@ node index.js
 ```
 
   ## Walkthrough
-<<<<<<< HEAD
-Here is a link to a video going over the steps to use the application: [README Generator Demo](https://www.youtube.com/watch?v=-pl_jXZ7b7w)
-=======
 Here is a link to a video going over the steps to use the application: [README Generator Demo](https://youtu.be/-pl_jXZ7b7w)
->>>>>>> 5fda431b8e7dc5fe6ac698619335b5ef1f0e185e
 
   ## Usage
   
