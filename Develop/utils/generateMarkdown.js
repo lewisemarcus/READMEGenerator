@@ -34,12 +34,12 @@ function authorFormat(contributors, primeAuth) {
 function instructionFormat(instructions, invoke) {
   const pkgManager = instructions[0]
   instructions.shift()
-  let instr = `Use the package manager [${pkgManager}] to install ${instructions}\r\n`
+  let instr = `Use the package manager [${pkgManager}] to install ${instructions}.\r\n`
   let install = ``
   for (let each of instructions) {
     install += `${pkgManager} install ${each}\r\n`
   }
-  return `${instr}\`\`\`\r\n\r\n${install}\r\n//To run\r\n${invoke}\r\n\r\n\`\`\``
+  return `${instr}\`\`\`bash\r\n\r\n${install}\r\n# To run:\r\n${invoke}\r\n\r\n\`\`\``
 }
 
 function contactInfo(firstLastUser) {
@@ -59,6 +59,28 @@ function formatContribute(contributing) {
   else return `## Contributing\r\n ${contributing}\r\n`
 }
 
+function formatUsage(usage) {
+  let usageList = ``
+  if (usage == '') return 'N/A'
+  else {
+    for (let each of usage.split(",")) {
+      usageList += `${each}\r\n`
+    }
+    return `\`\`\`js\r\n\r\n${usageList}\r\n\r\n\`\`\``
+  } 
+}
+
+function formatTests(test) {
+  let testList = ``
+  if (test == '') return 'N/A'
+  else {
+    for (let each of test.split(",")) {
+      testList += `${each}\r\n`
+    }
+    return `\`\`\`js\r\n\r\n${testList}\r\n\r\n\`\`\``
+  } 
+}
+
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
   let authors
@@ -66,9 +88,9 @@ function generateMarkdown(data) {
   if (data.authorBool === "Yes") {authors = data.authors.split(",")}
   else {authors = ''}
   let instructions = data.instructions.split(",")
-  return `#  ${capitalizeFirstLetter(data.title)} \r\n
-  ${renderLicenseBadge(data.license.split("(")[0])} \r\n
-  ## Description \r\n
+  return `#  ${capitalizeFirstLetter(data.title)}\r\n
+  ${renderLicenseBadge(data.license.split("(")[0])}\r\n
+  ## Description\r\n
   ${data.description}\r\n
   ## Table of Contents\r\n
   - [Installation](#installation)\r\n
@@ -80,12 +102,12 @@ function generateMarkdown(data) {
   ## Installation\r\n
   ${instructionFormat(instructions, data.invoke)}\r\n
   ${formatWalkthrough(data)}
-  ## Usage\r\n
-  \`\`\`\r\n\r\n${data.usage}\r\n\r\n \`\`\`\r\n
+  ## Usage
+  \r\n${formatUsage(data.usage)}\r\n
   ## Author(s)\r\n
   ${authorFormat(authors, primeAuth)}
-  \r\n## Tests\r\n
-  \`\`\`\r\n\r\n${data.test}\r\n\r\n \`\`\`\r\n
+  \r\n## Tests
+  \r\n${formatTests(data.test)}\r\n
   ${formatContribute(data.contributing)}
   \r\n## License\r\n
   ${renderLicenseSection(data.license)}\r\n

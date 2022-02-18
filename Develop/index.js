@@ -5,11 +5,11 @@ const generateMarkdown = require("./utils/generateMarkdown")
 // TODO: Create an array of questions for user input
 const questions = ["What is the title of your project? ",
     "Please enter a description of your project (be detailed and remember to save before exiting!): ",
-    "First list the package manager, then list the packages the user will need to install in order to run the application (separate each by a comma, no spaces!): ",
+    "First list the package manager, then list the packages the user will need to install in order to run the application (separate each by a comma only!): ",
     "Enter the line of code needed to invoke the application: ",
-    "Please enter the usage information, code block markdown ACTIVE (please allow one space between each example of usage, and remember to save before exiting!): ",
+    "Please enter the usage information, or leave the line empty and press enter to skip. Code block markdown ACTIVE (separate each usage example by a comma only!): ",
     "Please choose a license for your application: ",
-    "Please enter the test instructions, code block markdown ACTIVE (please allow one empty line space between each instruction, and remember to save before exiting!): ",
+    "Please enter the test instructions, or leave the line empty and press enter to skip. Code block markdown ACTIVE (separate each test example by a comma only!): ",
     "Please enter the lead author's first name, last name, GitHub username, and email address (separate each by a comma, no spaces!): ",
     "Are there other authors?: ",
     "Please enter the remaining author(s)'s GitHub username(s), and separate multiple users with commas (no spaces!): ",
@@ -63,13 +63,9 @@ const prompts = [
         }
     },
     {
-        type: 'editor',
+        type: 'input',
         message: questions[4],
-        name: 'usage',
-        validate: (value) => {
-            if (value) return true
-            else return ('Please enter usage instructions to continue: ')
-        }
+        name: 'usage'
     },
     {
         type: 'list',
@@ -117,13 +113,9 @@ const prompts = [
         }
     },
     {
-        type: 'editor',
+        type: 'input',
         message: questions[6],
-        name: 'test',
-        validate: (value) => {
-            if (value) return true
-            else return ('Please enter testing instructions before continuing: ')
-        }
+        name: 'test'
     },
     {
         type: 'input',
