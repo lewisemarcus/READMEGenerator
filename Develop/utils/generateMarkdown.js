@@ -51,7 +51,7 @@ function contactInfo(firstLastUser) {
 
 function formatWalkthrough(data) {
   if (data.walkthroughBool === "No") return ''
-  else return `## Walkthrough\r\nHere is a link to a video going over the steps to use the application: [${data.title} Demo](${data.walkthrough})\r\n`
+  else return `Here is a link to a video going over the steps to use the application: [${data.title} Demo](${data.walkthrough})\r\n`
 }
 
 function formatContribute(contributing) {
@@ -94,6 +94,7 @@ function generateMarkdown(data) {
   ${data.description}\r\n
   ## Table of Contents\r\n
   - [Installation](#installation)\r\n
+  - [Walkthrough](#walkthrough)\r\n
   - [Usage](#usage)\r\n
   - [Author(s)](#author(s))\r\n
   - [Contributing](#contributing)\r\n
@@ -101,6 +102,7 @@ function generateMarkdown(data) {
   - [Questions](#questions)\r\n
   ## Installation\r\n
   ${instructionFormat(instructions, data.invoke)}\r\n
+  ## Walkthrough\r\n
   ${formatWalkthrough(data)}
   ## Usage
   \r\n${formatUsage(data.usage)}\r\n
