@@ -50,7 +50,7 @@ function contactInfo(firstLastUser) {
 }
 
 function formatWalkthrough(data) {
-  if (data.walkthroughBool === "No") return ''
+  if (data.walkthroughBool === "No") return 'N/A'
   else return `Here is a link to a video going over the steps to use the application: [${data.title} Demo](${data.walkthrough})\r\n`
 }
 
