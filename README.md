@@ -28,9 +28,11 @@ THEN a user is taken to the corresponding section of the README
 
   - [Installation](#installation)
 
+  - [Walkthrough](#walkthrough)
+
   - [Usage](#usage)
 
-  - [Author(s)](#author(s))
+  - [Author(s)](#authors)
 
   - [Contributing](#contributing)
 
